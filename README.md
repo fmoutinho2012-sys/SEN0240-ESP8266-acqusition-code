@@ -5,10 +5,10 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 #### Experimental validation across multiple subjects demonstrated a Signal-to-Noise Ratio (SNR) of 51.3 dB and a Pearson correlation of 0.91 with clinical-grade signals. This project proves that clinical-level sEMG acquisition requirements can be met using accessible off-the-shelf components.
 
 ### Repository Structure:
-### firmware: MicroPython code for the ESP8266:
-EMG_ADS1015_1000SPS_80s_v4.py: High-speed binary acquisition script.
-### processing: Python scripts for PC-based data analysis:
-plotter_data(10Rx8seg)_binary_mv.py: DSP engine, avering, and benchmarking plotter.
+### firmware: MicroPython code for the ESP8266 (acquisition program):
+EMG_ADS1015_1000SPS_80s_v4.py: High-speed binary acquisition script via i2c with ADS1015
+### processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
+plotter_data(10Rx8seg)_binary_mv_stats_2.py
 
 ## Installation & Usage:
 Install MicroPython on your ESP8266.
@@ -21,7 +21,7 @@ code
 Bash
 * pip install numpy scipy matplotlib
 Process and visualize the data (binary):
-* run: python plotter_data(10Rx8seg)_binary_mv.py  &nbsp; your_data_file.bin
+* run: plotter_data(10Rx8seg)_binary_mv_stats_2.py  &nbsp; your_data_file.bin
   
 
 ## DSP Pipeline Details
@@ -32,6 +32,28 @@ To match clinical standards, the raw signal undergoes the following stages:
 * Full-wave Rectification: Extracting signal magnitude.
 * Linear Envelope: 3 Hz low-pass filter (Leaky Integrator).
 * Downsampling: Polyphase resampling to 100 Hz for NinaPro alignment.
+
+### Classification: Implements a Random Forest Classifier with 5-fold Stratified Cross-Validation to benchmark system accuracy for both 3-gesture sets and binary command sets.
+### Requirements
+To run the analysis, you need Python 3.8+ and the following libraries:
+* numpy: For numerical processing and vector operations.
+* scipy: For signal processing (filters and resampling).
+* scikit-learn: For the Random Forest model and statistical validation metrics.
+* matplotlib: (Optional) For signal visualization.
+
+ ##Install dependencies via pip:
+code
+Bash
+* pip install numpy scipy scikit-learn
+
+## How to Use
+Place your .bin files in the same directory as the script.
+Ensure filenames contain the gesture labels: fist, thumb, or spread.
+### Execute the script:
+code
+Bash
+* python sEMG_Gesture_Recognition_Pipeline.py 
+
 
 ### Contac: 
 * Author: Fernando Moutinho
