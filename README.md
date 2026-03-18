@@ -6,9 +6,9 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 
 ### Repository Structure:
 ### -Firmware: MicroPython code for the ESP8266 (acquisition program):
-$${\color{LightBlue} \text{EMG\\_ADS1015\\_1000SPS\\_80s\\_v4.py}}$$   -High-speed binary acquisition script via i2c with ADS1015
+* $${\color{LightBlue} \text{EMG\\_ADS1015\\_1000SPS\\_80s\\_v4.py}}$$   -High-speed binary acquisition script via i2c with ADS1015
 ### -Processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
-$${\color{LightBlue} \text{plotter\\_data(10Rx8seg)\\_binary\\_mv\\_stats\\_2.py}}$$
+* $${\color{LightBlue} \text{plotter\\_data(10Rx8seg)\\_binary\\_mv\\_stats\\_2.py}}$$
 ### -Classification: Implements a Random Forest Classifier
 sEMG_Gesture_Recognition_Pipeline.py 
 
