@@ -9,6 +9,8 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 EMG_ADS1015_1000SPS_80s_v4.py: High-speed binary acquisition script via i2c with ADS1015
 ### processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
 plotter_data(10Rx8seg)_binary_mv_stats_2.py
+### Classification: Implements a Random Forest Classifier
+sEMG_Gesture_Recognition_Pipeline.py 
 
 ## Installation & Usage:
 Install MicroPython on your ESP8266.
