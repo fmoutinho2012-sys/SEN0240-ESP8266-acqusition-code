@@ -5,11 +5,11 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 #### Experimental validation across multiple subjects demonstrated a Signal-to-Noise Ratio (SNR) of 51.3 dB and a Pearson correlation of 0.91 with clinical-grade signals. This project proves that clinical-level sEMG acquisition requirements can be met using accessible off-the-shelf components.
 
 ### Repository Structure:
-### firmware: MicroPython code for the ESP8266 (acquisition program):
-EMG_ADS1015_1000SPS_80s_v4.py: High-speed binary acquisition script via i2c with ADS1015
-### processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
+### -Firmware: MicroPython code for the ESP8266 (acquisition program):
+$${\color{lightblue} EMG_ADS1015_1000SPS_80s_v4.py }$$: High-speed binary acquisition script via i2c with ADS1015
+### -Processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
 plotter_data(10Rx8seg)_binary_mv_stats_2.py
-### Classification: Implements a Random Forest Classifier
+### -Classification: Implements a Random Forest Classifier
 sEMG_Gesture_Recognition_Pipeline.py 
 
 ## Installation & Usage:
