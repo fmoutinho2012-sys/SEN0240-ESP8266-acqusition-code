@@ -10,7 +10,7 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 ### -Processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
 * $${\color{LightBlue} \text{plotter\\_data(10Rx8seg)\\_binary\\_mv\\_stats\\_2.py}}$$
 ### -Classification: Implements a Random Forest Classifier
-sEMG_Gesture_Recognition_Pipeline.py 
+* $${\color{LightBlue} \text{sEMG\\_Gesture\\_Recognition\\_Pipeline.py}}$$ 
 
 ## Installation & Usage:
 Install MicroPython on your ESP8266.
