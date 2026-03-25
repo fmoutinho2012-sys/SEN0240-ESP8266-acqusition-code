@@ -10,7 +10,8 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 ### -Processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
 * $${\color{LightBlue} \text{plotter\\_data(10Rx8seg)\\_binary\\_mv\\_stats\\_2.py}}$$
 ### -Pearson Correlation Analysis:
-* $${\color{LightBlue} \text{Pearson\_correlation\_validator\_with\_OFFSET\_SAMPLES.py}}$$
+* ### -Pearson Correlation Analysis:
+* $${\color{LightBlue} \text{Pearson\\_correlation\\_validator\\_with\\_OFFSET\\_SAMPLES.py}}$$
 ### -Classification: Implements a Random Forest Classifier
 * $${\color{LightBlue} \text{sEMG\\_Gesture\\_Recognition\\.py}}$$
   
