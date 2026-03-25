@@ -14,6 +14,8 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 * $${\color{LightBlue} \text{Pearson\\_correlation\\_validator\\_with\\_OFFSET\\_SAMPLES.py}}$$
 ### -Classification: Implements a Random Forest Classifier
 * $${\color{LightBlue} \text{sEMG\\_Gesture\\_Recognition.py}}$$
+### -SNR Analysis:
+* $${\color{LightBlue} \text{sEMG\_SNR\_calculator.py}}$$
 
   
 
