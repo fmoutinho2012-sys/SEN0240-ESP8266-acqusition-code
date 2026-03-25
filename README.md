@@ -124,9 +124,9 @@ When the script finishes, it will display a technical characterization in the co
 * ======================================================================
  * TECHNICAL CHARACTERIZATION: fist_gesture_raw_2.bin
 * ======================================================================
- 1. **Processed Signal Peak (Asignal):           8.57 mV
- 2. **Raw Input Noise (Offset 2k-3k):            3.79 mV
- 3. **Residual Noise (Post-DSP RMS):            0.3119 mV
+ 1. Processed Signal Peak (Asignal):           8.57 mV
+ 2. Raw Input Noise (Offset 2k-3k):            3.79 mV
+ 3. Residual Noise (Post-DSP RMS):            0.3119 mV
 * ---------------------------------------------------------------------
  * Filtering Efficiency:                         94.18 %
  * Signal-to-Noise Ratio (SNR dB):               28.78 dB
