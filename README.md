@@ -120,9 +120,9 @@ seg_raw_rest = raw_100[start + 200 : start + 300]
 #### **Example Output (Console Report)**
 When the script finishes, it will display a technical characterization in the console:
 
-### text
+### SNR Report example:
 * ======================================================================
- TECHNICAL CHARACTERIZATION: fist_gesture_raw_2.bin
+ * TECHNICAL CHARACTERIZATION: fist_gesture_raw_2.bin
 * ======================================================================
  1. **Processed Signal Peak (Asignal):           8.57 mV
  2. **Raw Input Noise (Offset 2k-3k):            3.79 mV
