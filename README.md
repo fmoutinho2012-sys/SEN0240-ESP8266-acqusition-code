@@ -18,10 +18,12 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
   
 
 ## Installation & Usage:
-Install MicroPython on your ESP8266. The ESP8266 used was with 1M memory size.
-  * Upload EMG_ADS1015_1000SPS_80s_v4.py using Thonny or your preferred Python IDE.
-  * Run the script. It will record 80 seconds of raw binary data (10 reps of 5s active / 3s rest).
-  * Download the resulting .bin file to your PC.
+Install MicroPython on your ESP8266. Note: This project was developed using an ESP8266 with 1MB of Flash memory.
+* 1.Prepare the Hardware: Install MicroPython on your ESP8266.
+* 2.Upload the Firmware: Transfer EMG_ADS1015_1000SPS_80s_v4.py to the board using Thonny or your preferred IDE.
+* 3.Data Acquisition: Run the script to start the recording.
+The protocol lasts 80 seconds, consisting of 10 repetitions (5s active / 3s rest).
+* 4.Data Transfer: Once finished, download the generated .bin file to your PC for processing.
 ## Processing off-le with DSP designed (PC):
 Ensure you have Python installed with the following libraries:
 code
