@@ -52,13 +52,13 @@ To match clinical standards, the raw signal undergoes the following stages:
 * Downsampling: Polyphase resampling to 100 Hz for NinaPro alignment.
 
 ### Pearson correlation analysis
-*run: pyhton Pearson_correlation_validator_with_OFFSET_SAMPLES.py
-*This script is designed to estimate the Pearson correlation coefficient for each gesture. 
-*The software compares the input binary data directly against the NinaPro DB1 database.
-*Requirements:
-*The script must be located in the same folder as the binary data file.
-*The NinaPro database file (S1_A1_E2) must also be present in the same directory.
-*Output:
+* run: pyhton Pearson_correlation_validator_with_OFFSET_SAMPLES.py
+* This script is designed to estimate the Pearson correlation coefficient for each gesture. 
+* The software compares the input binary data directly against the NinaPro DB1 database.
+* Requirements:
+* The script must be located in the same folder as the binary data file.
+* The NinaPro database file (S1_A1_E2) must also be present in the same directory.
+* Output:
 Visualization: A plot comparing the acquired binary signal vs. the NinaPro reference.(correlation factor included in the plot).
 Console Report: Prints the final calculated Pearson correlation factor.
 
