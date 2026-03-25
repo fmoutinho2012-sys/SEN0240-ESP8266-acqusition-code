@@ -88,11 +88,11 @@ Ensure filenames contain the gesture labels: fist, thumb, or spread.
 code
 Bash
 * run: python sEMG_Gesture_Recognition.py 
-*This software implements a Random Forest classifier using 1,440 sliding windows (200 ms width, 50% overlap).
-*It evaluates performance across three distinct gestures and generates a detailed confusion matrix.
-*Outputs:
-*Confusion matrix for analysis (table 3)
-*Step-by-step processing logs (Feature extraction to benchmarking).
+* This software implements a Random Forest classifier using 1,440 sliding windows (200 ms width, 50% overlap).
+* It evaluates performance across three distinct gestures and generates a detailed confusion matrix.
+* Outputs:
+* Confusion matrix for analysis (table 3)
+* Step-by-step processing logs (Feature extraction to benchmarking).
 
 
 ### Contac: 
