@@ -25,17 +25,21 @@ Install MicroPython on your ESP8266. Note: This project was developed using an E
    * *Note: The protocol lasts 80 seconds, consisting of 10 repetitions (5s active / 3s rest).*
 4. **Data Transfer:** Once finished, download the generated `.bin` file to your PC for processing.
 
+## Offline DSP Processing (PC)
+### Offline DSP Processing (PC)
+Ensure you have **Python** installed with the following libraries:
+* `numpy`
+* `matplotlib`
+* `scipy`
+#### Process and visualize the data (binary):
 
-## Offline DSP Processing (PC):
+* **Run:** `python plotter_data(10Rx8seg)_binary_mv_stats_2.py gesture_file.bin`
+* This software processes the acquired binary data by applying a **DSP pipeline** to extract key EMG features.
+* The results—including **Peak, MAV, RMS, and Waveform Length (WL)**—are calculated and reported via the console.
+* Finally, the script generates a **visual plot** of the processed signal for analysis.
 
-Ensure you have Python installed with the following libraries:
-code
-Bash
-* pip install numpy scipy matplotlib
-Process and visualize the data (binary):
-* run: plotter_data(10Rx8seg)_binary_mv_stats_2.py  &nbsp; gesture_file.bin
-* This software processes the acquired binary data by applying a DSP pipeline to extract key EMG features. The results, including Peak, MAV, RMS, and Waveform Length (WL), are  calculated and reported via the console.
-* Finally, the script generates a visual plot of the processed signal for analysis.
+
+
   
 ## DSP Pipeline Details
 To match clinical standards, the raw signal undergoes the following stages:
