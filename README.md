@@ -97,7 +97,8 @@ Bash
 * Step-by-step processing logs (Feature extraction to benchmarking).
 
 ### SNR analysis:
-* run: pyhton sEMG_SNR_calculator.py  gesture.bin
+* **Run:** &nbsp; `python sEMG_SNR_calculator.py gesture_file.bin`
+
 * The program will detect the noise floor and the peak value in the current session
 * The results will be reported by console and also a visulazation of the curve.
 ### Noise Window Adjustment (Offset)
