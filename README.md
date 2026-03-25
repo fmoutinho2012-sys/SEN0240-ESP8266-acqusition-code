@@ -1,31 +1,35 @@
 #### This repository provides the software stack for a high-fidelity surface electromyography (sEMG) acquisition system designed for benchmarking low-cost hardware against clinical-grade standards. 
-#### The system utilizes an ESP8266 microcontroller and an ADS1015 12-bit ADC to achieve a deterministic sampling rate of 1000 SPS, ensuring strict temporal and spectral alignment with reference databases such as NinaPro DB1.
+#### The system utilizes an ESP8266 microcontroller and an ADS1015 12-bit ADC (connected to SEN0240 sEMG vía I2C)  to achieve a deterministic sampling rate of 1000 SPS, ensuring strict temporal and spectral alignment with reference databases such as NinaPro DB1.
 The firmware is implemented in MicroPython and utilizes an optimized binary data-streaming protocol. This method ensures a stable 1000 Hz sampling frequency by bypassing the Flash memory write latency of the ESP8266. The accompanying offline Python engine performs the complete digital signal processing pipeline, including 4th-order Butterworth band-pass filtering (20–450 Hz), 50 Hz digital notch filtering, full-wave rectification, linear envelope extraction via a 3 Hz leaky integrator, and polyphase resampling to 100 Hz.
 #### Hardware integration requires an ESP8266 clocked at 160 MHz connected to an ADS1015 via I2C on GPIO 0 (SCL) and GPIO 2 (SDA). The ADC address must be set to 0x48 by grounding the ADDR pin. The DFRobot SEN0240 sensor is connected to channels A0 and A1 in differential mode.
-#### Experimental validation across multiple subjects demonstrated a Signal-to-Noise Ratio (SNR) of 51.3 dB and a Pearson correlation of 0.91 with clinical-grade signals. This project proves that clinical-level sEMG acquisition requirements can be met using accessible off-the-shelf components.
+#### Experimental validation across multiple subjects demonstrated an average Signal-to-Noise Ratio (SNR) over 29 dB and Pearson correlation of 0.80 morphological correlation with clinical-grade signals. This project proves that clinical-level sEMG acquisition requirements can be met using accessible off-the-shelf components.
 
 ### Repository Structure:
 ### -Firmware: MicroPython code for the ESP8266 (acquisition program):
 * $${\color{LightBlue} \text{EMG\\_ADS1015\\_1000SPS\\_80s\\_v4.py}}$$   -High-speed binary acquisition script via i2c with ADS1015
 ### -Processing: Python scripts for PC-based data analysis (to obtain statistics peak, MAV, RMS, WL and visualization):
 * $${\color{LightBlue} \text{plotter\\_data(10Rx8seg)\\_binary\\_mv\\_stats\\_2.py}}$$
+### Pearson Correlation Analysis
+* $${\color{LightBlue} \text{Pearson\_correlation\_validator\_with\_OFFSET\_SAMPLES\.py}}$$
 ### -Classification: Implements a Random Forest Classifier
-* $${\color{LightBlue} \text{sEMG\\_Gesture\\_Recognition\\_Pipeline.py}}$$ 
+* $${\color{LightBlue} \text{sEMG\\_Gesture\\_Recognition\\.py}}$$
+  
 
 ## Installation & Usage:
-Install MicroPython on your ESP8266.
-  * Upload EMG_ADS1015_1000SPS_80s.py using Thonny or your preferred Python IDE.
+Install MicroPython on your ESP8266. The ESP8266 used was with 1M memory size.
+  * Upload EMG_ADS1015_1000SPS_80s_v4.py using Thonny or your preferred Python IDE.
   * Run the script. It will record 80 seconds of raw binary data (10 reps of 5s active / 3s rest).
   * Download the resulting .bin file to your PC.
-## Processing (PC):
+## Processing off-le with DSP designed (PC):
 Ensure you have Python installed with the following libraries:
 code
 Bash
 * pip install numpy scipy matplotlib
 Process and visualize the data (binary):
-* run: plotter_data(10Rx8seg)_binary_mv_stats_2.py  &nbsp; your_data_file.bin
+* run: plotter_data(10Rx8seg)_binary_mv_stats_2.py  &nbsp; gesture_file.bin
+* This software processes the acquired binary data by applying a DSP pipeline to extract key EMG features. The results, including Peak, MAV, RMS, and Waveform Length (WL), are  calculated and reported via the console.
+* Finally, the script generates a visual plot of the processed signal for analysis.
   
-
 ## DSP Pipeline Details
 To match clinical standards, the raw signal undergoes the following stages:
 * DC Offset Removal: Centering the signal at 0 mV.
@@ -34,6 +38,17 @@ To match clinical standards, the raw signal undergoes the following stages:
 * Full-wave Rectification: Extracting signal magnitude.
 * Linear Envelope: 3 Hz low-pass filter (Leaky Integrator).
 * Downsampling: Polyphase resampling to 100 Hz for NinaPro alignment.
+
+### Pearson correlation analysis
+*run: pyhton Pearson_correlation_validator_with_OFFSET_SAMPLES.py
+*This script is designed to estimate the Pearson correlation coefficient for each gesture. 
+*The software compares the input binary data directly against the NinaPro DB1 database.
+*Requirements:
+*The script must be located in the same folder as the binary data file.
+*The NinaPro database file (S1_A1_E2) must also be present in the same directory.
+*Output:
+Visualization: A plot comparing the acquired binary signal vs. the NinaPro reference.(correlation factor included in the plot).
+Console Report: Prints the final calculated Pearson correlation factor.
 
 ### Classification: Implements a Random Forest Classifier with 5-fold Stratified Cross-Validation to benchmark system accuracy for both 3-gesture sets and binary command sets.
 ### Requirements
@@ -49,12 +64,17 @@ Bash
 * pip install numpy scipy scikit-learn
 
 ## How to Use
-Place your .bin files in the same directory as the script.
+Place your all .bin files in the same directory as the script.
 Ensure filenames contain the gesture labels: fist, thumb, or spread.
 ### Execute the script:
 code
 Bash
-* python sEMG_Gesture_Recognition_Pipeline.py 
+* run: python sEMG_Gesture_Recognition.py 
+*This software implements a Random Forest classifier using 1,440 sliding windows (200 ms width, 50% overlap).
+*It evaluates performance across three distinct gestures and generates a detailed confusion matrix.
+*Outputs:
+*Confusion matrix for analysis (table 3)
+*Step-by-step processing logs (Feature extraction to benchmarking).
 
 
 ### Contac: 
