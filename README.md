@@ -52,6 +52,12 @@ To match clinical standards, the raw signal undergoes the following stages:
 * Downsampling: Polyphase resampling to 100 Hz for NinaPro alignment.
 
 ### Pearson correlation analysis
+#### Configuration
+Before running the script, ensure you edit the following fields with the appropriate values inside the code:
+* `user_file= = 'fist_gesture_raw_2.bin'`
+* `FILE_MAT_NINAPRO = 'S1_A1_E2.mat'`
+* `GESTURE_ID = 6`
+* `CHANNELS_NINA = 2`
 * run: pyhton Pearson_correlation_validator_with_OFFSET_SAMPLES.py
 * This script is designed to estimate the Pearson correlation coefficient for each gesture. 
 * The software compares the input binary data directly against the NinaPro DB1 database.
