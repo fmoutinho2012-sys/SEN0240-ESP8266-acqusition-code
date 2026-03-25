@@ -99,6 +99,24 @@ Bash
 *run: pyhton sEMG_SNR_calculator.py  gesture.bin
 *The program will detect the noise floor and the peak value in the current session
 *The results will be reported by console and also a visulazation of the curve.
+### Noise Window Adjustment (Offset)
+
+The script uses a specific **rest window** to measure the hardware base noise (electronic interference) before the muscle is activated.
+
+#### **What is it for?**
+This window (set by default from samples **2000 to 3000**) is taken during the rest period (`DUR_REST`). The script calculates the average of this signal to "clean" the background noise and obtain an accurate **SNR (Signal-to-Noise Ratio)**. If your rest signal starts earlier or later, you must move this window to avoid accidentally capturing the beginning of the muscle contraction.
+
+#### **How to change the values?**
+Look for the following line inside the `perform_ensemble_analysis` function:
+
+* pythoncode:
+# Rest window: from 200 to 300 (100Hz scale = 2000 to 3000 original)
+seg_raw_rest = raw_100[start + 200 : start + 300]
+* First value (200): The starting point of the noise sample.
+* Second value (300): The ending point of the noise sample.
+### [!IMPORTANT]
+* Scale Note: Since the code processes data resampled at 100Hz, you must divide the original sample value by 10.
+* Example: To analyze from sample 1500 to 2500, you should enter [start + 150 : start + 250].
 
 
 ### Contac: 
