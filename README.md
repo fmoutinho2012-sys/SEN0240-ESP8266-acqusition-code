@@ -13,7 +13,8 @@ The firmware is implemented in MicroPython and utilizes an optimized binary data
 * ### -Pearson Correlation Analysis:
 * $${\color{LightBlue} \text{Pearson\\_correlation\\_validator\\_with\\_OFFSET\\_SAMPLES.py}}$$
 ### -Classification: Implements a Random Forest Classifier
-* $${\color{LightBlue} \text{sEMG\\_Gesture\\_Recognition\\.py}}$$
+* $${\color{LightBlue} \text{sEMG\\_Gesture\\_Recognition.py}}$$
+
   
 
 ## Installation & Usage:
