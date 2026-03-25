@@ -1,0 +1,10 @@
+Subjet Nº 1
+
+Subject	Hand	Handedness	Gender	Age	Heigh	Weight	File
+1	Intact	Right		Male	21	169	77	s1
+2	Intact	Right		Female	32	172	57	s2
+3	Intact	Right		Female	25	169	48	s3
+4	Intact	Right		Male	39	171	83	s4
+5	Intact	Right		Male	55	170	79	s5
+6	Intact	Right		Male	41	171	73	s6
+	
