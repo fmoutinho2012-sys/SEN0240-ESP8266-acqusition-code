@@ -33,7 +33,7 @@ Ensure you have **Python** installed with the following libraries:
 * `scipy`
 #### Process and visualize the data (binary):
 
-* **Run:** `python plotter_data(10Rx8seg)_binary_mv_stats_2.py gesture_file.bin`
+* **Run:** `python plotter_data(10Rx8seg)_binary_mv_stats_2.py &nbsp; gesture_file.bin`
 * This software processes the acquired binary data by applying a **DSP pipeline** to extract key EMG features.
 * The results—including **Peak, MAV, RMS, and Waveform Length (WL)**—are calculated and reported via the console.
 * Finally, the script generates a **visual plot** of the processed signal for analysis.
