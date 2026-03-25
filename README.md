@@ -59,7 +59,8 @@ Before running the script, ensure you edit the following fields with the appropr
 * `GESTURE_ID = 6`
 * `CHANNELS_NINA = 2`
 * `OFFSET_SAMPLES = 105`
-* run: pyhton Pearson_correlation_validator_with_OFFSET_SAMPLES.py
+* **Run:** &nbsp; `python  Pearson_correlation_validator_with_OFFSET_SAMPLES.py`
+
 * This script is designed to estimate the Pearson correlation coefficient for each gesture. 
 * The software compares the input binary data directly against the NinaPro DB1 database.
 * Requirements:
