@@ -72,4 +72,8 @@ The scripts in `legacy/` were written for an earlier version of the work.
 
 ## Licence and citation
 
-[AUTHOR: choose a licence for code (for example MIT) and for data (for example CC BY 4.0), and add a CITATION file once the paper has a reference.]
+- Code (`analysis/`, `firmware/EMG_ADS1015_1000SPS_80s_v4.py`, `legacy/`): MIT licence, see `LICENSE`.
+- Data (`data/`), oscilloscope images and hardware documentation (`hardware/`): CC BY 4.0, see `LICENSE-DATA.md`.
+- The MicroPython image in `firmware/` is distributed under the MicroPython project's MIT licence.
+- To cite the repository, see `CITATION.cff`; the associated paper is to be added to it once it has a reference.
+- Contact: Fernando J. Moutinho Deyán, Departamento de Tecnologías de la Información, Universidad CEU San Pablo, Madrid; fernando.moutinhodeyan@ceu.es; ORCID 0000-0001-5668-0218.
