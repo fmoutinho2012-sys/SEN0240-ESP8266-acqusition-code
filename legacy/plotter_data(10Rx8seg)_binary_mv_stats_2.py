@@ -32,7 +32,7 @@ def cargar_binario_ads1015(fichero):
     return np.array(voltajes)
 
 def dsp_pipeline_nina_style(data):
-    """Procesamiento digital de señales siguiendo el estándar clínico"""
+    """Digital signal processing (legacy script)"""
     nyq = 0.5 * FS_ORIGINAL
     
     # 1. Filtro Band-pass (20-450 Hz) - 4º Orden
@@ -50,7 +50,7 @@ def dsp_pipeline_nina_style(data):
     be, ae = butter(2, 3.0/nyq, btype='low')
     envelope = filtfilt(be, ae, rectified)
     
-    # 5. Resample a 100Hz para alineación con base de datos clínica
+    # 5. Resample a 100Hz para comparison with the NinaPro DB1 sampling rate
     num_muestras_100hz = int(len(envelope) * FS_TARGET / FS_ORIGINAL)
     sig_100 = resample(envelope, num_muestras_100hz)
     
@@ -99,7 +99,7 @@ if __name__ == "__main__":
         # Obtener métricas reales
         mav, rms, wl, max_amp = calculate_metrics(processed_envelope)
         
-        # Resultados por consola formateados para el Paper
+        # Console report
         print("\n" + "="*50)
         print(f" RESULTADOS TÉCNICOS: {archivo}")
         print("="*50)

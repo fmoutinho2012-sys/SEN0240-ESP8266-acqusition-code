@@ -1,0 +1,94 @@
+
+PCB Wizard 3 Gerber Export
+--------------------------
+
+Created : 08/04/2019 18:02:47
+Source  : PCB Wizard 3.50 (28 Oct 2004)
+Design  : E:\ESP8266 to Busisness\ESP8266_Dev_board_Busisness_3.0.pcb
+Title   : ESP8266
+Author  : Fernando Moutinho
+Company : 
+
+RS-274X (extended) Gerber export.
+2.4 format, millimetres, absolute.
+No zero supression.
+Aperture table defined in Gerber file.
+
+----
+
+File: "E:\ESP8266 to Busisness\Gerber files\ESP8266_Dev_board_Busisness_3.0.gb0"
+
+  Board outline layer
+
+  D-Code   Type
+  D10      Circle ,508
+
+----
+
+File: "E:\ESP8266 to Busisness\Gerber files\ESP8266_Dev_board_Busisness_3.0.gb1"
+
+  Bottom copper (solder side) layer
+
+  D-Code   Type
+  D10      Oval 2,997 1,803
+  D11      Circle 2,032
+  D12      Circle 1,016
+  D13      Circle 1,499
+  D14      Circle ,889
+  D15      Oval 2,007 2,540
+  D16      Circle ,813
+  D17      Oval 2,540 1,270
+  D18      Circle 2,108
+  D19      Oval 1,270 2,540
+  D20      Rectangle 4,699 3,988
+  D21      Oval 2,007 2,997
+  D22      Rectangle 5,004 5,004
+  D23      Circle ,991
+  D24      Circle 2,007
+
+----
+
+File: "E:\ESP8266 to Busisness\Gerber files\ESP8266_Dev_board_Busisness_3.0.gb2"
+
+  Top copper (component side) layer
+
+  D-Code   Type
+  D10      Oval 2,997 1,803
+  D11      Circle 2,032
+  D12      Oval 2,007 2,540
+  D13      Oval 2,540 1,270
+  D14      Circle 2,108
+  D15      Oval 1,270 2,540
+  D16      Rectangle 4,699 3,988
+  D17      Oval 2,007 2,997
+  D18      Rectangle 5,004 5,004
+
+----
+
+File: "E:\ESP8266 to Busisness\Gerber files\ESP8266_Dev_board_Busisness_3.0.gb3"
+
+  Silk screen (component outline) layer
+
+  D-Code   Type
+  D10      Circle ,127
+  D11      Circle ,356
+
+----
+
+File: "E:\ESP8266 to Busisness\Gerber files\ESP8266_Dev_board_Busisness_3.0.drl"
+
+  Drill hole layer
+
+  T-Code   Size
+  T01      ,508
+  T02      ,510
+  T03      ,550
+  T04      ,600
+  T05      ,900
+  T06      1,000
+  T07      3,000
+  T08      4,000
+
+----
+
+End of report.
