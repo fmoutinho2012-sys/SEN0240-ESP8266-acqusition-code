@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite it as below."
+title: "SEN0240 + ADS1015 + ESP8266 single-channel sEMG acquisition chain: firmware, analysis code, recordings and bench checks"
+type: software
+authors:
+  - family-names: "Moutinho Deyán"
+    given-names: "Fernando J."
+    orcid: "https://orcid.org/0000-0001-5668-0218"
+    affiliation: "Universidad CEU San Pablo, Madrid, Spain"
+repository-code: "https://github.com/fmoutinho2012-sys/SEN0240-ESP8266-acqusition-code"
+license: MIT
+date-released: "2026-10-18"
