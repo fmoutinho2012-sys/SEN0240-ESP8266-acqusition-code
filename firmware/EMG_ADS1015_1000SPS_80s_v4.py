@@ -13,12 +13,13 @@ freq(160000000) # CPU a 160MHz para garantizar el timing de 1ms
 i2c = I2C(scl=Pin(0), sda=Pin(2), freq=400000)
 ADS_ADDR = 0x48
 
-# CONFIGURACIÓN TÉCNICA PARA JUECES / ARTÍCULO:
-# Registro 0x01 (Config): b'\x42\x83'
-# - MUX: 100 (Diferencial AINP=AIN0, AINN=AIN1) -> MODO DIFERENCIAL ACTIVO
-# - PGA: 001 (+/- 4.096V) -> Resolución: 2.0 mV/bit (12-bit)
-# - MODE: 0 (Modo Continuo)
-# - DR: 100 (1600 SPS internos para evitar latencia en muestreo de 1000Hz)
+# ADS1015 configuration register (0x01) = 0x4283
+# - MUX: 100  -> SINGLE-ENDED, AIN0 versus GND (the sensor output is on AIN0)
+# - PGA: 001  -> full scale +/-4.096 V, 2 mV per code (2 uV at the sensor input, gain 1000)
+# - MODE: 0   -> continuous conversion
+# - DR: 100   -> 1600 SPS internal rate; the ESP8266 reads at 1000 Hz without using the
+#                ready signal, so each sample is the latest completed conversion
+#                (timing uncertainty up to 0.625 ms)
 i2c.writeto_mem(ADS_ADDR, 0x01, b'\x42\x83')
 
 # 2. Configuración del Experimento
@@ -35,8 +36,8 @@ buf_temp = bytearray(2)
 read_into = i2c.readfrom_mem_into
 us = time.ticks_us
 
-print(f"--- ADS1015: CAPTURA DIFERENCIAL SINCRONIZADA v4 ---")
-print(f"Modo: Diferencial A0-A1 | Frecuencia: {SPS_TARGET} Hz")
+print("--- ADS1015: single-ended acquisition v4 ---")
+print(f"Mode: single-ended AIN0-GND | Read rate: {SPS_TARGET} Hz")
 print(f"Protocolo: 80s (10 repeticiones 5s ON / 3s OFF)")
 time.sleep(2)
 

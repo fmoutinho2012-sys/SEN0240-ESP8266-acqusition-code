@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# --- CONFIGURACIÓN TÉCNICA DEL DATASET (Basado en Paper V18) ---
+# --- CONFIGURACIÓN TÉCNICA DEL DATASET (legacy script, earlier manuscript version) ---
 FS = 1000.0         # Frecuencia de muestreo (Hz)
 WINDOW_SIZE = 200    # Ventana de 200ms (200 muestras)
 STEP_SIZE = 100      # Desplazamiento de 100ms (50% Overlap)
@@ -124,14 +124,14 @@ if __name__ == "__main__":
         clf_bin.fit(X_bin[train_idx], y_bin[train_idx])
         accs_2.append(accuracy_score(y_bin[test_idx], clf_bin.predict(X_bin[test_idx])))
 
-    # --- RESULTADOS FINALES PARA EL PAPER ---
+    # --- FINAL RESULTS ---
     print("\n[STEP 2] Benchmark Results:")
     print("-" * 60)
     print(f" ACCURACY (Full 3-Gesture Set):  {np.mean(accs_3)*100:.2f}%")
     print(f" ACCURACY (Binary: Fist vs Thumb): {np.mean(accs_2)*100:.2f}%")
     print("-" * 60)
     
-    print("\n[STEP 3] Confusion Matrix (3-Gesture Set) for Table 3:")
+    print("\n[STEP 3] Confusion Matrix (3-Gesture Set) :")
     print(cm_3.astype(int))
     print("\n[STEP 4] Per-Gesture Recall:")
     gestures = ['Fist', 'Thumb Up', 'Finger Spread']
@@ -140,5 +140,5 @@ if __name__ == "__main__":
         print(f" {g}: {recall*100:.2f}%")
     
     print("\n" + "="*60)
-    print(" Analysis complete. Data is ready for Paper V18 and GitHub.")
+    print(" Analysis complete. Legacy script: see analysis/reproduce_analysis.py for the full validation.")
     print("="*60 + "\n")
