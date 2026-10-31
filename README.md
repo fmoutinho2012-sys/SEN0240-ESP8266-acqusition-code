@@ -23,8 +23,8 @@ Wiring: I2C on GPIO 0 (SCL) and GPIO 2 (SDA), 400 kHz; ADDR pin to ground.
 | Folder | Content |
 |---|---|
 | `firmware/` | MicroPython acquisition script `EMG_ADS1015_1000SPS_80s_v4.py` and the MicroPython image used |
-| `data/` | 18 raw recordings (6 participants × 3 gestures) and the participant table. File index 7 is participant S6. `data/tests/Test_{50,100,250,450}Hz_raw.bin` are the digitised test tones (80 s each, same firmware) |
-| `analysis/` | `reproduce_analysis.py` regenerates every number of Section 3 of the paper; `reanalysis_detected_segments.py` repeats the classification with windows from detected contraction and rest segments and estimates the burst period; `analyse_250Hz_test.py` and `analyse_tone_tests.py` analyse the 250 Hz tone and the four tones; `simulate_timing_effect.py` simulates the effect of the inferred read timing on the features |
+| `data/` | 18 raw recordings (6 participants × 3 gestures) and the participant table. File index 7 is participant S6. `data/tests/Test_{1,50,100,250,450}Hz_raw.bin` are the digitised test tones (80 s each, same firmware; the 1 Hz file is a sine of 1.5 Vpp with +0.75 V offset, the others 1.0 Vpp with +1.5 V offset) |
+| `analysis/` | `reproduce_analysis.py` regenerates every number of Section 3 of the paper; `reanalysis_detected_segments.py` repeats the classification with windows from detected contraction and rest segments and estimates the burst period; `analyse_250Hz_test.py` and `analyse_tone_tests.py` analyse the 250 Hz tone and the four tones; `analyse_1Hz_test.py` analyses the 1 Hz sine (fit, linearity, timing of the reads by position in the block); `simulate_timing_effect.py` simulates the effect of the inferred read timing on the features |
 | `legacy/` | Earlier scripts kept for traceability. Their outputs are **not** comparable with the paper (see below) |
 | `hardware/` | Schematic and Gerber files of the board used; bill of materials; `bench_checks/` oscilloscope captures of the 250 Hz test (time domain and FFT) |
 
@@ -40,6 +40,7 @@ python analysis/reproduce_analysis.py data results
 python analysis/reanalysis_detected_segments.py data results
 python analysis/analyse_250Hz_test.py data/tests/Test_250Hz_raw.bin results
 python analysis/analyse_tone_tests.py data/tests results
+python analysis/analyse_1Hz_test.py data/tests/Test_1Hz_raw.bin results
 python analysis/simulate_timing_effect.py data data/tests/Test_100Hz_raw.bin results 20
 ```
 
@@ -56,6 +57,7 @@ Processing: zero-phase 4th-order Butterworth band-pass 20–450 Hz, 50 Hz notch 
 - Rest noise floor referred to the sensor input: median 69 µV RMS (range 52–281 µV) in 20–450 Hz.
 - Detection-based SNR: mean 6.3 dB (range 3.1–12.8 dB). This is an upper estimate, because the segments are chosen from the signal itself.
 - Digitised test tones (1.0 Vpp on the oscilloscope at the converter input; 50, 100, 250 and 450 Hz): the tone line holds only 26, 24, 20 and 17 % of the power (coherent SNR −4.6, −5.1, −6.1 and −7.0 dB), against 25, 19, 11 and 6 dB expected from the conversion timing alone, with a 10 Hz comb (the 100 ms block period). In 23–25 of 80 one-second windows the strongest line lies at about 0.73 of the tone frequency, that is, samples taken about 0.73 ms apart; the phase of the 50 and 100 Hz tones gives read intervals of about 0.7 ms in the first 40 samples of each 100-sample block and about 0.95 ms in the rest. Because the mean rate is exactly 1000 reads per second, the pause at each block boundary is inferred at about 11–14 ms (not measured). In the steady part of the block (positions 60–95) the timing scatter per read is 184, 193, 197 and 211 µs at 50, 100, 250 and 450 Hz (about 180 µs expected from the 0.625 ms conversion window). A simulation with this inferred timing (stationary signal with the mean spectrum of the recordings, 20 realisations) lowers ZC and SSC by about 8 %, WL by 9 % and MNF and MDF by about 4 % (window scatter up to 10 % and 22 %), and leaves MAV, RMS and VAR within their spread between realisations; it is a simulation, not a measurement on the recordings.
+- Digitised 1 Hz sine (generator: 1.5 Vpp, +0.75 V offset, i.e. 750 mV offset and 750 mV amplitude): 80 000 samples, codes 18–754, no saturation. Sine fit to the whole record: offset 765.7 mV, amplitude 725.5 mV, frequency 0.99995 Hz (residual 65.5 mV rms because the block timing is irregular). Fit to the steady part of each block (positions 60–99, free time shift per block): offset 768.8 mV, amplitude 729.7 mV (−2.7 % against 750 mV), residual 1.5 mV rms in steady blocks, no level-dependent error above 0.5 mV. The amplitude and offset differences from the set values are not explained (generator, converter gain and offset and source loading were not checked separately). Timing: the samples at the start of each block are about 9 ms late and recover over about 35 reads (about 10 ms of extra time at the block boundary, quartiles 6.5–10.9 ms); about every 2 s (20.4 blocks, close to 4096 bytes of flash) a longer stall of 53–80 ms follows, a cause that was not tested.
 - Contractions repeat about every 4.3 s, not every 8 s, so windows from the nominal 8 s grid mix rest and contraction.
 - A Random Forest reaches 81.9 % on three gestures in the original three-file design on nominal windows. With windows from detected segments, true-rest windows are classified better than contraction windows within participants (79.7 % against 69.8 %, folds grouped by segment), and with leave-one-participant-out the accuracy on contraction windows (47.4 %) is close to the majority-class baseline (43.8 %). The classifier identifies the recording, not the gesture.
 - Bench checks (shorted sensor input, converter alone, 50 Hz common-mode injection), AC-coupled at 5 mV/div on the converter input pins, gave residuals below 1 mV peak to peak, which is below the converter step; these are upper bounds, not noise or CMRR measurements.
@@ -72,8 +74,4 @@ The scripts in `legacy/` were written for an earlier version of the work.
 
 ## Licence and citation
 
-- Code (`analysis/`, `firmware/EMG_ADS1015_1000SPS_80s_v4.py`, `legacy/`): MIT licence, see `LICENSE`.
-- Data (`data/`), oscilloscope images and hardware documentation (`hardware/`): CC BY 4.0, see `LICENSE-DATA.md`.
-- The MicroPython image in `firmware/` is distributed under the MicroPython project's MIT licence.
-- To cite the repository, see `CITATION.cff`; the associated paper is to be added to it once it has a reference.
-- Contact: Fernando J. Moutinho Deyán, Departamento de Tecnologías de la Información, Universidad CEU San Pablo, Madrid; fernando.moutinhodeyan@ceu.es; ORCID 0000-0001-5668-0218.
+[AUTHOR: choose a licence for code (for example MIT) and for data (for example CC BY 4.0), and add a CITATION file once the paper has a reference.]
